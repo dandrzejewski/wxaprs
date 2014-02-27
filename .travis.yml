@@ -2,4 +2,6 @@ language: python
 python:
   - "2.7"
 install:
-  - "pip install pytz pyserial"
+  - "pip install pytz"
+  - "pip install pyserial"
+
