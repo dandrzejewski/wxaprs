@@ -101,15 +101,15 @@ class WxAprs(object):
         Main Loop.
         """
 
-        while True:
-            packet = self.parse_and_construct_packet()
-            if USE_SERIAL:
-                self.send_serial_packet(packet)
+#        while True:
+        packet = self.parse_and_construct_packet()
+        if USE_SERIAL:
+            self.send_serial_packet(packet)
 
-            if USE_FILE:
-                self.write_file(packet)
+        if USE_FILE:
+            self.write_file(packet)
 
-            time.sleep(INTERVAL_IN_SECONDS)
+#            time.sleep(INTERVAL_IN_SECONDS)
 
 if __name__ == "__main__":
     wxaprs = WxAprs()
