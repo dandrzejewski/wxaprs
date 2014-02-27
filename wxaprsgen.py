@@ -15,7 +15,7 @@ OUTPUT_FILE = "/tmp/wxpacket.txt"
 SERIAL_DEVICE = "/dev/tty.usbserial-FTH09DY2"
 PACKET_COMMENT = "!SN!"
 COORDINATES = "4128.26N/08133.43W"
-DATA_FILE = "/Users/dave/Google Drive/Weather Data/current.lst"
+DATA_FILE = "/tmp/current.txt"
 INTERVAL_IN_SECONDS = 300
 
 USE_SERIAL = False
