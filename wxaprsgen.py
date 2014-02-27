@@ -4,17 +4,22 @@ wxaprsgen
 """
 import ConfigParser
 from datetime import datetime
+import os
 import pytz
 import serial
 import time
 
 __author__ = 'dave'
 
+OUTPUT_FILE = "/tmp/wxpacket.txt"
 SERIAL_DEVICE = "/dev/tty.usbserial-FTH09DY2"
 PACKET_COMMENT = "!SN!"
 COORDINATES = "4128.26N/08133.43W"
 DATA_FILE = "/Users/dave/Google Drive/Weather Data/current.lst"
 INTERVAL_IN_SECONDS = 300
+
+USE_SERIAL = False
+USE_FILE = True
 
 class WxAprs(object):
 
@@ -84,13 +89,26 @@ class WxAprs(object):
         return packet
 
 
+    def write_file(self, packet):
+        """
+        Writes the packet to a file.
+        """
+        with open(OUTPUT_FILE, "w") as f:
+            f.write("{}{}".format(packet, os.linesep))
+
     def run(self):
         """
         Main Loop.
         """
 
         while True:
-            self.send_serial_packet(self.parse_and_construct_packet())
+            packet = self.parse_and_construct_packet()
+            if USE_SERIAL:
+                self.send_serial_packet(packet)
+
+            if USE_FILE:
+                self.write_file(packet)
+
             time.sleep(INTERVAL_IN_SECONDS)
 
 if __name__ == "__main__":
