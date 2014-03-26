@@ -14,7 +14,9 @@ __author__ = 'dave'
 OUTPUT_FILE = "/tmp/wxpacket.txt"
 SERIAL_DEVICE = "/dev/tty.usbserial-FTH09DY2"
 PACKET_COMMENT = "146.475MHz !SN!"
-COORDINATES = "4128.26N/08133.43W"
+
+# A "/" here means primary symbol table and "\" means secondary
+COORDINATES = "4128.26N\\08133.43W"
 DATA_FILE = "/tmp/current.txt"
 INTERVAL_IN_SECONDS = 300
 
@@ -83,7 +85,7 @@ class WxAprs(object):
         humidity = "%.2d" % float(humidity_raw.replace('"', ''))
         barometer = "%.5d" % (float(barometer_raw.replace('"', '')) * 10)
 
-        packet = "@" + timestamp + COORDINATES + "_" + wind_dir + "/" + wind_speed + "g" + wind_gust + "t" + temperature + "r" + rain_1h + "p" + rain_24h + "P" + rain_since_midnight \
+        packet = "@" + timestamp + COORDINATES + "y" + wind_dir + "/" + wind_speed + "g" + wind_gust + "t" + temperature + "r" + rain_1h + "p" + rain_24h + "P" + rain_since_midnight \
                  + "h" + humidity + "b" + barometer + "e" + software + " " + PACKET_COMMENT
 
         return packet
